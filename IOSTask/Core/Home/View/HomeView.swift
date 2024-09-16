@@ -10,11 +10,16 @@ import SwiftUI
 struct HomeView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
-    
+    @State private var showDetailsView: Bool = false
+    @State private var productId: Int? = nil
+
     var body: some View {
         VStack(spacing: 0) {
             categoryView
             productView
+        }
+        .navigationDestination(isPresented: $showDetailsView) {
+            ProductLoadingView(productId: $productId)
         }
         .navigationTitle("Products")
     }
@@ -52,6 +57,9 @@ extension HomeView {
                 ForEach(vm.productsList) { product in
                     ProductViewCard(product: product)
                         .padding()
+                        .onTapGesture {
+                            segue(productId: product.id ?? 0)
+                        }
                         .onAppear {
                             if product == vm.productsList.last {
                                 vm.getMoreData()
@@ -65,6 +73,12 @@ extension HomeView {
                 }
             }
 
+
         }
+    }
+
+    private func segue(productId: Int) {
+        self.productId = productId
+        showDetailsView.toggle()
     }
 }

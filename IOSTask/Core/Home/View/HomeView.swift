@@ -9,9 +9,13 @@ import SwiftUI
 
 struct HomeView: View {
 
-    @EnvironmentObject private var vm: HomeViewModel
+    @StateObject private var vm: HomeViewModel
     @State private var showDetailsView: Bool = false
     @State private var productId: Int? = nil
+
+    init() {
+        _vm = StateObject(wrappedValue: HomeViewModel(dataService: ProductListDataService()))
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -28,7 +32,6 @@ struct HomeView: View {
 #Preview {
     NavigationStack {
         HomeView()
-            .environmentObject(HomeViewModel(dataService: ProductListDataService()))
     }
 
 }

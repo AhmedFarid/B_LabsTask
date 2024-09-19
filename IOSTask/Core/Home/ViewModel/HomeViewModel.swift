@@ -52,9 +52,10 @@ class HomeViewModel: ObservableObject {
                 if case .failure(let error) = completion {
                     self.errorMessage = error.localizedDescription
                 }
-            } receiveValue: { [weak self] products in
+            } receiveValue: { [weak self] product in
                 guard let self = self else {return}
-                self.productsList = products.products ?? []
+                self.productsList = product.products ?? []
+                checkHaveMoreData(total: product.total ?? 0)
             }
             .store(in: &cancellable)
     }

@@ -16,7 +16,7 @@ class ProductImageViewModel: ObservableObject {
     private let dataService: ProductImageServices
     private var cancellable = Set<AnyCancellable>()
 
-    init(url: URL) {
+    init(url: String) {
         self.dataService = ProductImageServices(url: url)
         self.addSubscribers()
         self.isLoading = true

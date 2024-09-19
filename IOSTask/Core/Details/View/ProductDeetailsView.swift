@@ -25,12 +25,12 @@ struct ProductDetailsView: View {
     @StateObject private var vm: ProductDetailsViewModel
 
     init(productId: Int) {
-        _vm = StateObject(wrappedValue: ProductDetailsViewModel(productId: productId))
+        _vm = StateObject(wrappedValue: ProductDetailsViewModel(productId: productId, dataService: ProductListDataService()))
     }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
+           LazyVStack(alignment: .leading) {
                 productTitle
                 productsImages
                 priceViewCard
@@ -74,10 +74,8 @@ extension ProductDetailsView {
     var productsImages: some View {
         TabView{
             ForEach(vm.product?.images ?? [], id: \.self) { imageUrl in
-                if let url = URL(string: imageUrl) {
-                    ProductImageView(url: url)
-                        .frame(height: 200)
-                }
+                ProductImageView(url: imageUrl)
+                    .frame(height: 200)
             }
         }
         .tabViewStyle(.page)

@@ -28,7 +28,7 @@ struct HomeView: View {
 #Preview {
     NavigationStack {
         HomeView()
-            .environmentObject(HomeViewModel())
+            .environmentObject(HomeViewModel(dataService: ProductListDataService()))
     }
 
 }

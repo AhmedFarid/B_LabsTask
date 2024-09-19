@@ -11,25 +11,27 @@ import Combine
 class ProductDetailsViewModel: ObservableObject {
 
     @Published var product: Product? = nil
+    @Published var errorMessage: String?
 
-    private let productListDataService: ProductListDataService
+    private let dataService: ProductListDataServiceProtocol
     private var cancellable = Set<AnyCancellable>()
 
-    init(productId: Int) {
-        self.productListDataService = ProductListDataService()
+    init(productId: Int, dataService: ProductListDataServiceProtocol) {
+        self.dataService = dataService
         getProduct(productId: productId)
-        addProductDataSubscription()
     }
 
     func getProduct(productId: Int) {
-        productListDataService.getProductDetails(productId: productId)
-    }
-
-    func addProductDataSubscription() {
-        productListDataService.$product
-            .sink(receiveValue: { productDetailsResponse  in
-                self.product = productDetailsResponse
-            })
+        dataService.getProductDetails(productId: productId)
+            .sink { [weak self] completion in
+                guard let self = self else {return}
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] products in
+                guard let self = self else {return}
+                self.product = products
+            }
             .store(in: &cancellable)
     }
 }

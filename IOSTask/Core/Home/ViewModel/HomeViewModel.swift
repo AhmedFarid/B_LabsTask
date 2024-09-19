@@ -10,42 +10,79 @@ import Combine
 
 class HomeViewModel: ObservableObject {
 
+    private let dataService: ProductListDataServiceProtocol
+    private var cancellable = Set<AnyCancellable>()
+
     @Published var productsList: [Product] = []
     @Published var category: [Category] = []
     @Published var selectedCategory: Category? = nil
+    @Published var errorMessage: String?
+
+
     @Published var isLoading = false
-    @Published var error: Error? = nil
+    @Published var hasMoreData = true
+    private var skip = 10
+    private let limit = 10
+    private var total = 0
 
-    private let productListDataService: ProductListDataService
-    private var cancellable = Set<AnyCancellable>()
-
-    init() {
-        self.productListDataService = ProductListDataService()
-        addProductDataSubscription()
-        addCategoryDataSubscription()
+    init(dataService: ProductListDataServiceProtocol) {
+        self.dataService = dataService
+        getCategory()
+        getProduct(byCategory: nil)
     }
 
-    func addCategoryDataSubscription()  {
-        productListDataService.$category
-            .sink { category in
+    func getCategory()  {
+        dataService.getCategories()
+            .sink { [weak self] completion in
+                guard let self = self else {return}
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] category in
+                guard let self = self else {return}
                 self.category = category
             }
             .store(in: &cancellable)
     }
 
-    func addProductDataSubscription() {
-        productListDataService.$products
-            .sink(receiveValue: { allProductsResponse  in
-                self.productsList = allProductsResponse
-            })
+    func getProduct(byCategory: String?) {
+        dataService.getProducts(byCategory: byCategory)
+            .sink { [weak self] completion in
+                guard let self = self else {return}
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] products in
+                guard let self = self else {return}
+                self.productsList = products.products ?? []
+            }
             .store(in: &cancellable)
     }
 
-    func getProduct(byCategory: String) {
-        productListDataService.getProducts(byCategory: byCategory)
+    func getMoreData() {
+        guard !isLoading && hasMoreData else {return}
+        isLoading = true
+        
+        dataService.loadMoreItem(limit: limit, skip: skip, byCategory: selectedCategory?.slug)
+            .sink { [weak self] completion in
+                guard let self = self else {return}
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] product in
+                guard let self = self else {return}
+                self.productsList.append(contentsOf: product.products ?? [])
+                checkHaveMoreData(total: product.total ?? 0)
+            }
+            .store(in: &cancellable)
     }
 
-    func getMoreData() {
-        productListDataService.loadMoreItem()
+    func checkHaveMoreData(total: Int) {
+        self.total = total
+        self.skip += self.limit
+        if self.skip >= self.total {
+            self.hasMoreData = false
+        }
+        self.isLoading = false
     }
 }

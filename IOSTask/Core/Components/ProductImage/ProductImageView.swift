@@ -10,17 +10,17 @@ import SwiftUI
 struct ProductImageView: View {
     @StateObject var vm: ProductImageViewModel
 
-    init(url: URL) {
+    init(url: String) {
         _vm = StateObject(wrappedValue: ProductImageViewModel(url: url))
     }
 
     var body: some View {
         ZStack {
             if let image = vm.image {
-                 Image(uiImage: image)
+                Image(uiImage: image)
                     .resizable()
-                                       .aspectRatio(contentMode: .fit)
-                                       .frame(height: 200)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 200)
             } else if vm.isLoading {
                 ProgressView()
             } else {
@@ -34,7 +34,7 @@ struct ProductImageView: View {
 
 struct ProductImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductImageView(url: URL(string: "https://cdn.dummyjson.com/products/images/womens-watches/Women's%20Wrist%20Watch/thumbnail.png")!)
+        ProductImageView(url: "https://cdn.dummyjson.com/products/images/womens-watches/Women's%20Wrist%20Watch/thumbnail.png")
             .padding()
             .previewLayout(.sizeThatFits)
     }

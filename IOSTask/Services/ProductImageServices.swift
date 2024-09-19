@@ -9,18 +9,25 @@ import Foundation
 import SwiftUI
 import Combine
 
+protocol ProductImageServicesProtocol {
+    func downloadProductImage()
+}
+
 class ProductImageServices {
 
     @Published var image: UIImage? = nil
-    private var imageSubscription: AnyCancellable?
-    private let url: URL
+    @Published var errorMessage: String?
+
+    private var cancellables = Set<AnyCancellable>()
+    private let url: String
+
     private let fileManager = LocalFileManger.instance
     private let folderName = "product_images"
     private let imageName: String
 
-    init(url: URL) {
+    init(url: String) {
         self.url = url
-        self.imageName = url.absoluteString
+        self.imageName = url
         getProductImage()
     }
 
@@ -35,17 +42,26 @@ class ProductImageServices {
     }
 
     private func downloadProductImage() {
-        imageSubscription = NetworkingManger.download(url: url)
-            .tryMap({ (data) -> UIImage? in
+        guard let url = URL(string: url) else {
+            self.errorMessage = NetworkingError.invalidURL.localizedDescription
+            return
+        }
+
+        NetworkingManger.fetchImages(url: url)
+            .tryMap { data -> UIImage? in
                 return UIImage(data: data)
-            })
-            .sink(receiveCompletion: NetworkingManger.handleCompletion, receiveValue: { [weak self] (returnedImage) in
+            }
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else {return}
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] (returnedImage) in
                 guard let self = self else {return}
                 guard let downloadedImage = returnedImage else {return}
                 self.image = downloadedImage
-                self.imageSubscription?.cancel()
                 self.fileManager.saveImage(image: downloadedImage, imageName: self.imageName, folderName: self.folderName)
             })
+            .store(in: &cancellables)
     }
 }
-

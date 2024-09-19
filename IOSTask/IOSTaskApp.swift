@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct IOSTaskApp: App {
-    @StateObject private var vm = HomeViewModel()
+    @StateObject private var vm = HomeViewModel(dataService: ProductListDataService())
 
     var body: some Scene {
         WindowGroup {

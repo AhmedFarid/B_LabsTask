@@ -22,7 +22,7 @@
 		FA5156892C9873A300A557E2 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5156882C9873A300A557E2 /* Categories.swift */; };
 		FA51568E2C98C52900A557E2 /* ProductDeetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51568D2C98C52900A557E2 /* ProductDeetailsView.swift */; };
 		FA5156912C98D50200A557E2 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5156902C98D50200A557E2 /* ProductDetailsViewModel.swift */; };
-		FA5156932C98E36700A557E2 /* ProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5156922C98E36700A557E2 /* ProductViewModelTests.swift */; };
+		FA5156932C98E36700A557E2 /* ProductListViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5156922C98E36700A557E2 /* ProductListViewModel_Tests.swift */; };
 		FA92E6042C90C8A60063763E /* IOSTaskApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92E6032C90C8A60063763E /* IOSTaskApp.swift */; };
 		FA92E6062C90C8A60063763E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92E6052C90C8A60063763E /* ContentView.swift */; };
 		FA92E6082C90C8A70063763E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA92E6072C90C8A70063763E /* Assets.xcassets */; };
@@ -68,7 +68,7 @@
 		FA5156882C9873A300A557E2 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		FA51568D2C98C52900A557E2 /* ProductDeetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDeetailsView.swift; sourceTree = "<group>"; };
 		FA5156902C98D50200A557E2 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
-		FA5156922C98E36700A557E2 /* ProductViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModelTests.swift; sourceTree = "<group>"; };
+		FA5156922C98E36700A557E2 /* ProductListViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel_Tests.swift; sourceTree = "<group>"; };
 		FA92E6002C90C8A60063763E /* IOSTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA92E6032C90C8A60063763E /* IOSTaskApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTaskApp.swift; sourceTree = "<group>"; };
 		FA92E6052C90C8A60063763E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				FA92E6142C90C8A70063763E /* IOSTaskTests.swift */,
-				FA5156922C98E36700A557E2 /* ProductViewModelTests.swift */,
+				FA5156922C98E36700A557E2 /* ProductListViewModel_Tests.swift */,
 			);
 			path = IOSTaskTests;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA5156932C98E36700A557E2 /* ProductViewModelTests.swift in Sources */,
+				FA5156932C98E36700A557E2 /* ProductListViewModel_Tests.swift in Sources */,
 				FA92E6152C90C8A70063763E /* IOSTaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

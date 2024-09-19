@@ -14,8 +14,8 @@ class HomeViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
 
     @Published var productsList: [Product] = []
-    @Published var category: [Category] = []
-    @Published var selectedCategory: Category? = nil
+    @Published var category: [CategoryModel] = []
+    @Published var selectedCategory: CategoryModel? = nil
     @Published var errorMessage: String?
 
 

@@ -33,6 +33,7 @@
 		FA9E54612C97A69300FF634C /* ProductsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9E54602C97A69300FF634C /* ProductsModel.swift */; };
 		FA9E54642C97A73C00FF634C /* ProductListDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9E54632C97A73C00FF634C /* ProductListDataService.swift */; };
 		FA9E54662C98279F00FF634C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9E54652C98279F00FF634C /* HomeViewModel.swift */; };
+		FAC1F1542C9CCF2E00E7EEC2 /* MockProductListDataService_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1F1532C9CCF2E00E7EEC2 /* MockProductListDataService_Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		FA9E54602C97A69300FF634C /* ProductsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsModel.swift; sourceTree = "<group>"; };
 		FA9E54632C97A73C00FF634C /* ProductListDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListDataService.swift; sourceTree = "<group>"; };
 		FA9E54652C98279F00FF634C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FAC1F1532C9CCF2E00E7EEC2 /* MockProductListDataService_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProductListDataService_Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 			children = (
 				FA92E6142C90C8A70063763E /* IOSTaskTests.swift */,
 				FA5156922C98E36700A557E2 /* ProductListViewModel_Tests.swift */,
+				FAC1F1532C9CCF2E00E7EEC2 /* MockProductListDataService_Test.swift */,
 			);
 			path = IOSTaskTests;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5156932C98E36700A557E2 /* ProductListViewModel_Tests.swift in Sources */,
+				FAC1F1542C9CCF2E00E7EEC2 /* MockProductListDataService_Test.swift in Sources */,
 				FA92E6152C90C8A70063763E /* IOSTaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

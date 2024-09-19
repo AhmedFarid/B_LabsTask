@@ -9,33 +9,33 @@ import Combine
 
 class MockProductListDataService: ProductListDataServiceProtocol {
 
-    let categoryList: [Category]
+    let categoryList: [CategoryModel]
     let productsModel: ProductsModel
     let product: Product
 
-    init(categoryList: [Category]?, productsModel: ProductsModel? , product: Product?) {
+    init(categoryList: [CategoryModel]?, productsModel: ProductsModel? , product: Product?) {
         self.categoryList =  categoryList ?? [
-            Category(
+            CategoryModel(
                 slug: "sadfsa",
                 name: "sadasd",
                 url: "dasdasd"),
-            Category(
+            CategoryModel(
                 slug: "sdsadsa",
                 name: "daseqwe",
                 url: "weqwe"),
-            Category(
+            CategoryModel(
                 slug: "sdsadsa",
                 name: "daseqwe",
                 url: "weqwe"),
-            Category(
+            CategoryModel(
                 slug: "sdsadsa",
                 name: "daseqwe",
                 url: "weqwe"),
-            Category(
+            CategoryModel(
                 slug: "sdsadsa",
                 name: "daseqwe",
                 url: "weqwe"),
-            Category(
+            CategoryModel(
                 slug: "sdsadsa",
                 name: "daseqwe",
                 url: "weqwe")]
@@ -66,7 +66,7 @@ class MockProductListDataService: ProductListDataServiceProtocol {
             availabilityStatus: "In Stock")
     }
 
-    func getCategories() -> AnyPublisher<[Category], any Error> {
+    func getCategories() -> AnyPublisher<[CategoryModel], any Error> {
         Just(categoryList)
             .tryMap({$0})
             .eraseToAnyPublisher()
@@ -91,5 +91,3 @@ class MockProductListDataService: ProductListDataServiceProtocol {
     }
 
 }
-
-

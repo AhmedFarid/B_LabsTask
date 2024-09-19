@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ProductListDataServiceProtocol {
-    func getCategories() -> AnyPublisher<[Category], Error>
+    func getCategories() -> AnyPublisher<[CategoryModel], Error>
     func getProducts(byCategory: String?) -> AnyPublisher<ProductsModel, Error>
     func loadMoreItem(limit: Int, skip: Int, byCategory: String?) -> AnyPublisher<ProductsModel, Error>
     func getProductDetails(productId: Int) -> AnyPublisher<Product, Error>
@@ -19,7 +19,7 @@ class ProductListDataService: ProductListDataServiceProtocol {
 
     init() {}
 
-    func getCategories() -> AnyPublisher<[Category], Error> {
+    func getCategories() -> AnyPublisher<[CategoryModel], Error> {
         guard let url = URL(string: "https://dummyjson.com/products/categories") else {
             return Fail(error: NetworkingError.invalidURL)
                 .eraseToAnyPublisher()
